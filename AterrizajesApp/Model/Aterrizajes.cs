@@ -9,6 +9,7 @@ namespace AterrizajesApp.Models
 {
     public class Aterrizajes
     {
+        public int Id { get; set; }
         public DateTime Tiempo { get; set; }
         public string Destino { get; set; } = "";
         

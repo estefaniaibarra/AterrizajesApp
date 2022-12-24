@@ -53,14 +53,14 @@ namespace AterrizajesApp.ViewModel
 
             foreach (var item in ListaAterrizajes)
             {
-                if(item.Status== "On Boarding")
+                if (item.Status == "On Boarding")
                 {
-                    cancelservice= new CanceladosService(item);
+                    cancelservice = new CanceladosService(item);
                     cancelservice.BorrarVueo += Cancelservice_BorrarVueo;
-                  
+
                 }
 
-                if (item.Tiempo.Date == fechaactual && item.Status == "On Time" )
+                if (item.Tiempo.Date == fechaactual && item.Status.ToLower() == "on time" )
                 {
                     if (((item.Tiempo.TimeOfDay - fechaactual.TimeOfDay).TotalMinutes) < 10)
                     {
@@ -71,7 +71,7 @@ namespace AterrizajesApp.ViewModel
 
 
                 }
-                else if (item.Tiempo.Date < fechaactual && item.Status == "On Time")
+                else if (item.Tiempo.Date < fechaactual && item.Status.ToLower() == "on time")
                 {
                     item.Status = "On Boarding";
                     await serviceAterrizaje.Update(item);
@@ -90,7 +90,7 @@ namespace AterrizajesApp.ViewModel
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
                obj.Status="Eliminado";
-
+                                   
                 serviceAterrizaje.Update(obj);
 
             });
