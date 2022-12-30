@@ -49,6 +49,21 @@ namespace AterrizajesApp.Services
                 Error?.Invoke(obj);
             }
         }
+        public async Task<bool> Delete(Aterrizajes p)
+        {
+            var response = await client.DeleteAsync("api/Aviones/" + p.Id);
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest) //BadRequest
+            {
+                var errores = await response.Content.ReadAsStringAsync();
+                LanzarErrorJson(errores);
+                return false;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                LanzarError("No se encontro el producto");
+            }
+            return true;
+        }
 
 
         public async Task<List<Aterrizajes>> GetAll()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AterrizajesApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,7 +37,10 @@ namespace AterrizajesApp
         {
             Application.Current.Shutdown();
         }
-        
-      
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ((AterrizajesViewModel)this.DataContext).CargarAterrizajes();
+        }
     }
 }

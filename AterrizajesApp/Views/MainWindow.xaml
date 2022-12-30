@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AterrizajesApp" xmlns:vm="clr-namespace:AterrizajesApp.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="450" MinWidth="800"  Height="450" Width="800" WindowStyle="None" Background="Black">
+        Title="MainWindow" MinHeight="450" MinWidth="800"  Height="450" Width="800"  Background="Black">
     <Window.DataContext>
         <vm:AterrizajesViewModel></vm:AterrizajesViewModel>
     </Window.DataContext>
@@ -14,76 +14,32 @@
         <Grid.RowDefinitions>
             <RowDefinition Height=".08*"/>
             <RowDefinition Height=".25*"/>
-            <RowDefinition/>
+        
         </Grid.RowDefinitions>
-        <!--Botones-->
-        <Grid Grid.Row="0">
-            <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="25"/>
-                <ColumnDefinition Width="25"/>
-            </Grid.ColumnDefinitions>
-            <Button Click="btnMinimize_Click" Grid.Column="1" Content="-"   Cursor="Hand">
-                <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="FontFamily" Value="15"/>
-                            <Setter Property="Foreground" Value="Black"/>
-                            <Setter Property="VerticalContentAlignment" Value="Top"/>
-                            <Setter Property="Background" Value="#F5E307"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#F5E307"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Width="18" Height="18" CornerRadius="9"  Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button Click="btnClose_Click" Grid.Column="2" Content="X" Cursor="Hand">
-                <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Foreground" Value="black"/>
-                            <Setter Property="Background" Value="#F5E307"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#F5E307"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Width="18" Height="18"  CornerRadius="9"  Background="{TemplateBinding Background}">
-                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-            </Grid>
-        </Grid>
+      
+      
         <!--Encabezado e imagen-->
-        <Grid Margin="15,0,15,0" Grid.Row="1" Background="#242424">
+        <Grid Margin="15,15,15,0" Grid.Row="0" Background="#242424">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".15*"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width=".45*"/>
+                <ColumnDefinition Width=".40*"/>
             </Grid.ColumnDefinitions>
-            <Image Source="/Assets/Avion.png" Margin="10"></Image>
+            <Image Source="/Assets/Avion.png" Grid.Column="0" Margin="10"></Image>
             <TextBlock Text="Arrivals" Grid.Column="1" 
                        Foreground="#F5E307" 
                        Typography.Capitals="AllSmallCaps"
                        FontFamily="Assets/MF RooneySans Regular.ttf" 
                        FontSize="55" VerticalAlignment="Center" 
                        HorizontalAlignment="Left"/>
+            <StackPanel Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="2">
+                <Label Foreground="White">Filtrar por fecha</Label>
+                <DatePicker SelectedDateChanged="DatePicker_SelectedDateChanged" SelectedDate="{Binding FechaFiltro}"></DatePicker>
+                
+            </StackPanel>
         </Grid>
         <!--Contenido-->
-        <DataGrid IsReadOnly="True" VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding ListaAterrizajes}" GridLinesVisibility="None" HorizontalScrollBarVisibility="Disabled" HeadersVisibility="Column" AutoGenerateColumns="False"  Background="#242424" Margin="15,0,15,15" Grid.Row="2" Height="auto" x:Name="Dtg" BorderThickness="0" BorderBrush="#242424">
+        <DataGrid IsReadOnly="True" VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding ListaAterrizajesFiltrada}" GridLinesVisibility="None" HorizontalScrollBarVisibility="Disabled" HeadersVisibility="Column" AutoGenerateColumns="False"  Background="#242424" Margin="15,0,15,15" Grid.Row="2" Height="auto" x:Name="Dtg" BorderThickness="0" BorderBrush="#242424">
             <!--Estilos DataGrid-->
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -109,10 +65,10 @@
             </DataGrid.Resources>
             <DataGrid.Columns >
                 <DataGridTextColumn Binding="{Binding Tiempo}" Width=".30*" Header="Tiempo"/>
-                <DataGridTextColumn Binding="{Binding Destino}" Width=".25*" Header="Destino"/>
+                <DataGridTextColumn Binding="{Binding Destino}" Width=".20*" Header="Destino"/>
                 <DataGridTextColumn Binding="{Binding Vuelo}" Width=".15*" Header="Vuelo"/>
                 <DataGridTextColumn Binding="{Binding Puerta}" Width=".15*" Header="Puerto"/>
-                <DataGridTextColumn Binding="{Binding Status}" Width=".15*" Header="Status"/>
+                <DataGridTextColumn Binding="{Binding Status}" Width=".20*" Header="Status"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
