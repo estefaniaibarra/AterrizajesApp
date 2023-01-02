@@ -16,7 +16,7 @@ namespace AterrizajesApp.Services
         {
             BaseAddress = new Uri("https://avionesaf.sistemas19.com/")
         };
-        public async Task<bool> Update(Aterrizajes p)
+        public async Task<bool> Update(Partidas p)
         {
             //Validar
 
@@ -49,7 +49,7 @@ namespace AterrizajesApp.Services
                 Error?.Invoke(obj);
             }
         }
-        public async Task<bool> Delete(Aterrizajes p)
+        public async Task<bool> Delete(Partidas p)
         {
             var response = await client.DeleteAsync("api/Aviones/" + p.Id);
             if (response.StatusCode == System.Net.HttpStatusCode.BadRequest) //BadRequest
@@ -66,19 +66,19 @@ namespace AterrizajesApp.Services
         }
 
 
-        public async Task<List<Aterrizajes>> GetAll()
+        public async Task<List<Partidas>> GetAll()
         {
-            List<Aterrizajes>? aterizajes = null;
+            List<Partidas>? aterizajes = null;
             var response = await client.GetAsync("api/Aviones");
             if (response.IsSuccessStatusCode)
             {
 
                 var json = await response.Content.ReadAsStringAsync();
-                aterizajes = JsonConvert.DeserializeObject<List<Aterrizajes>?>(json);
+                aterizajes = JsonConvert.DeserializeObject<List<Partidas>?>(json);
             }
             if (aterizajes == null)
             {
-                return new List<Aterrizajes>();
+                return new List<Partidas>();
             }
             else
             {

@@ -13,7 +13,7 @@ namespace AterrizajesApp.Services
     public class CanceladosService
     {
 
-        public CanceladosService(Aterrizajes cancelado)
+        public CanceladosService(Partidas cancelado)
         {
 
             Thread hiloRecibir = new Thread(new ParameterizedThreadStart(eliminarcancelado));
@@ -35,14 +35,14 @@ namespace AterrizajesApp.Services
 
          public void timer_Tick(object sender, EventArgs e, object p)
         {
-           Eliminar((Aterrizajes)p);
+           Eliminar((Partidas)p);
 
            
            
         }
 
-        public event Action<Aterrizajes>? BorrarVueo;
-        public void Eliminar(Aterrizajes cancelado)
+        public event Action<Partidas>? BorrarVueo;
+        public void Eliminar(Partidas cancelado)
         {
             Temporizador.Stop();
             BorrarVueo?.Invoke(cancelado);

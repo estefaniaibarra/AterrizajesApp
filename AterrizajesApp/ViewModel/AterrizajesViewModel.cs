@@ -14,12 +14,12 @@ namespace AterrizajesApp.ViewModel
 {
     public class AterrizajesViewModel:INotifyPropertyChanged
     {
-        public ObservableCollection<Aterrizajes> ListaAterrizajes { get; set; }=new ObservableCollection<Aterrizajes>();
-        public ObservableCollection<Aterrizajes> ListaAterrizajesFiltrada { get; set; }
+        public ObservableCollection<Partidas> ListaAterrizajes { get; set; }=new ObservableCollection<Partidas>();
+        public ObservableCollection<Partidas> ListaAterrizajesFiltrada { get; set; }
 
         public List<string> cancelados = new List<string>() ;
 
-        public List<Aterrizajes>    Cancelados { get; set; }
+        public List<Partidas>    Cancelados { get; set; }
         
         readonly AterrizajesService serviceAterrizaje = new();
 
@@ -38,7 +38,7 @@ namespace AterrizajesApp.ViewModel
             Temporizador.Interval = TimeSpan.FromSeconds(10);
             Temporizador.Tick += timer_Tick;
             Temporizador.Start();
-            Cancelados = new List<Aterrizajes>();
+            Cancelados = new List<Partidas>();
 
             FechaFiltro = DateTime.Now.Date;
         }
@@ -51,7 +51,7 @@ namespace AterrizajesApp.ViewModel
        public async void CargarAterrizajes()
         {
             //ListaAterrizajes.Clear();
-            ListaAterrizajes = new ObservableCollection<Aterrizajes>(await serviceAterrizaje.GetAll());
+            ListaAterrizajes = new ObservableCollection<Partidas>(await serviceAterrizaje.GetAll());
 
 
 
@@ -70,20 +70,26 @@ namespace AterrizajesApp.ViewModel
                 }
             
 
-            if (item.Tiempo.Date == fechaactual.Date && item.Status.ToLower() == "on time")
+            if (item.Tiempo.Date == fechaactual.Date && item.Status.ToLower() == "programado")
             {
-                if (((item.Tiempo.TimeOfDay - fechaactual.TimeOfDay).TotalMinutes) < 10)
+                    var diferencia= (item.Tiempo.TimeOfDay - fechaactual.TimeOfDay).TotalMinutes;
+                if (diferencia < 10 && diferencia !<0)
                 {
-                    item.Status = "On Boarding";
+                    item.Status = "Abordando";
                     await serviceAterrizaje.Update(item);
                 }
+                else if (diferencia<0)
+                    {
+                        item.Status = "En vuelo";
+                        await serviceAterrizaje.Update(item);
+                    }
 
 
 
             }
-            else if (item.Tiempo.Date < fechaactual.Date && item.Status.ToLower() == "on time")
+            else if (item.Tiempo.Date < fechaactual.Date && item.Status.ToLower() == "programado")
             {
-                item.Status = "On Boarding";
+                item.Status = "Concluido";
                 await serviceAterrizaje.Update(item);
             }
 
@@ -91,14 +97,14 @@ namespace AterrizajesApp.ViewModel
 
         }
 
-            ListaAterrizajesFiltrada = new ObservableCollection<Aterrizajes>(ListaAterrizajes.Select(x => x).Where(x => x.Tiempo.Date == FechaFiltro.Date));
+            ListaAterrizajesFiltrada = new ObservableCollection<Partidas>(ListaAterrizajes.Select(x => x).Where(x => x.Tiempo.Date == FechaFiltro.Date));
         Actualizar(nameof(ListaAterrizajesFiltrada));
             Actualizar(nameof(FechaFiltro));
 
 
         }
 
-        private void Cancelservice_BorrarVueo(Aterrizajes obj)
+        private void Cancelservice_BorrarVueo(Partidas obj)
         {
            
                obj.Status="Eliminado";

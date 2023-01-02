@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AterrizajesApp.Models
 {
-    public class Aterrizajes
+    public class Partidas
     {
         public int Id { get; set; }
         public DateTime Tiempo { get; set; }

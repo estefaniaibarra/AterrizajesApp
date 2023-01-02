@@ -10,15 +10,12 @@
         <vm:AterrizajesViewModel></vm:AterrizajesViewModel>
     </Window.DataContext>
     <Grid>
-        <!--definir espacio-->
+      
         <Grid.RowDefinitions>
             <RowDefinition Height=".08*"/>
             <RowDefinition Height=".25*"/>
-        
         </Grid.RowDefinitions>
-      
-      
-        <!--Encabezado e imagen-->
+
         <Grid Margin="15,15,15,0" Grid.Row="0" Background="#242424">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".15*"/>
@@ -35,12 +32,10 @@
             <StackPanel Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="2">
                 <Label Foreground="White">Filtrar por fecha</Label>
                 <DatePicker SelectedDateChanged="DatePicker_SelectedDateChanged" SelectedDate="{Binding FechaFiltro}"></DatePicker>
-                
+
             </StackPanel>
         </Grid>
-        <!--Contenido-->
         <DataGrid IsReadOnly="True" VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding ListaAterrizajesFiltrada}" GridLinesVisibility="None" HorizontalScrollBarVisibility="Disabled" HeadersVisibility="Column" AutoGenerateColumns="False"  Background="#242424" Margin="15,0,15,15" Grid.Row="2" Height="auto" x:Name="Dtg" BorderThickness="0" BorderBrush="#242424">
-            <!--Estilos DataGrid-->
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Typography.Capitals" Value="AllSmallCaps"/>
