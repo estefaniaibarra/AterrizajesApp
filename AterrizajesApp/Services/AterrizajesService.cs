@@ -18,7 +18,6 @@ namespace AterrizajesApp.Services
         };
         public async Task<bool> Update(Partidas p)
         {
-            //Validar
 
             var json = JsonConvert.SerializeObject(p);
             var response = await client.PutAsync("api/Aviones", new StringContent(json, Encoding.UTF8,

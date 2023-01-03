@@ -23,7 +23,7 @@
                 <ColumnDefinition Width=".40*"/>
             </Grid.ColumnDefinitions>
             <Image Source="/Assets/Avion.png" Grid.Column="0" Margin="10"></Image>
-            <TextBlock Text="Arrivals" Grid.Column="1" 
+            <TextBlock Text="Salidas" Grid.Column="1" 
                        Foreground="#F5E307" 
                        Typography.Capitals="AllSmallCaps"
                        FontFamily="Assets/MF RooneySans Regular.ttf" 

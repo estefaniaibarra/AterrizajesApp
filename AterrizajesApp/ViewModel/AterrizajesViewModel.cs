@@ -70,10 +70,10 @@ namespace AterrizajesApp.ViewModel
                 }
             
 
-            if (item.Tiempo.Date == fechaactual.Date && item.Status.ToLower() == "programado")
+            if (item.Tiempo.Date == fechaactual.Date && (item.Status.ToLower() == "programado"|| item.Status.ToLower() == "abordando"))
             {
                     var diferencia= (item.Tiempo.TimeOfDay - fechaactual.TimeOfDay).TotalMinutes;
-                if (diferencia < 10 && diferencia !<0)
+                if (diferencia < 10 && diferencia >0)
                 {
                     item.Status = "Abordando";
                     await serviceAterrizaje.Update(item);
@@ -87,7 +87,7 @@ namespace AterrizajesApp.ViewModel
 
 
             }
-            else if (item.Tiempo.Date < fechaactual.Date && item.Status.ToLower() == "programado")
+            else if (item.Tiempo.Date < fechaactual.Date && (item.Status.ToLower() == "programado" || item.Status.ToLower() == "en vuelo"))
             {
                 item.Status = "Concluido";
                 await serviceAterrizaje.Update(item);
