@@ -30,7 +30,7 @@ namespace AterrizajesApp.Services
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                LanzarError("No se encontro el producto");
+                LanzarError("No se encontro el vuelo.");
             }
             return true;
         }
@@ -59,7 +59,7 @@ namespace AterrizajesApp.Services
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                LanzarError("No se encontro el producto");
+                LanzarError("No se encontro el vuelo.");
             }
             return true;
         }
