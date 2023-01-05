@@ -53,6 +53,7 @@ namespace AterrizajesApp.ViewModel
             //ListaAterrizajes.Clear();
             ListaAterrizajes = new ObservableCollection<Partidas>(await serviceAterrizaje.GetAll());
 
+            ListaAterrizajesFiltrada = new ObservableCollection<Partidas>(ListaAterrizajes.Select(x => x).Where(x => x.Tiempo.Date == FechaFiltro.Date));
 
 
             DateTime fechaactual = DateTime.Now;
@@ -68,9 +69,15 @@ namespace AterrizajesApp.ViewModel
                     cancelservice.BorrarVueo += Cancelservice_BorrarVueo;
 
                 }
-            
 
-            if (item.Tiempo.Date == fechaactual.Date && (item.Status.ToLower() == "programado"|| item.Status.ToLower() == "abordando"))
+                if (item.Status == "En vuelo" && fechaactual.TimeOfDay.Subtract(item.Tiempo.TimeOfDay).TotalSeconds>30)
+                {
+
+                    await serviceAterrizaje.Delete(item);
+                }
+
+
+                if (item.Tiempo.Date == fechaactual.Date && (item.Status.ToLower() == "programado"|| item.Status.ToLower() == "abordando"))
             {
                     var diferencia= (item.Tiempo.TimeOfDay - fechaactual.TimeOfDay).TotalMinutes;
                 if (diferencia < 10 && diferencia >0)
