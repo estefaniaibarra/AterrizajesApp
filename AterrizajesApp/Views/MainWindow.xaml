@@ -10,61 +10,71 @@
         <vm:AterrizajesViewModel></vm:AterrizajesViewModel>
     </Window.DataContext>
     <Grid>
-      
+        <!--definir espacio-->
         <Grid.RowDefinitions>
             <RowDefinition Height=".08*"/>
             <RowDefinition Height=".25*"/>
+
         </Grid.RowDefinitions>
 
-        <Grid Margin="15,15,15,0" Grid.Row="0" Background="#242424">
+
+        <!--Encabezado e imagen-->
+        <Grid  Grid.Row="0" Background="Black">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".15*"/>
                 <ColumnDefinition Width=".45*"/>
                 <ColumnDefinition Width=".40*"/>
             </Grid.ColumnDefinitions>
-            <Image Source="/Assets/Avion.png" Grid.Column="0" Margin="10"></Image>
-            <TextBlock Text="Salidas" Grid.Column="1" 
+            <Image Source="/Assets/Avion.png" Grid.Column="0" Margin="15"></Image>
+            <TextBlock Text="Arrivals" Grid.Column="1" 
                        Foreground="#F5E307" 
                        Typography.Capitals="AllSmallCaps"
                        FontFamily="Assets/MF RooneySans Regular.ttf" 
                        FontSize="55" VerticalAlignment="Center" 
                        HorizontalAlignment="Left"/>
-            <StackPanel Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="2">
+            <StackPanel Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="2" >
                 <Label Foreground="White">Filtrar por fecha:</Label>
                 <DatePicker SelectedDateChanged="DatePicker_SelectedDateChanged" SelectedDate="{Binding FechaFiltro}"></DatePicker>
 
             </StackPanel>
         </Grid>
-        <DataGrid IsReadOnly="True" VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding ListaAterrizajesFiltrada}" GridLinesVisibility="None" HorizontalScrollBarVisibility="Disabled" HeadersVisibility="Column" AutoGenerateColumns="False"  Background="#242424" Margin="15,0,15,15" Grid.Row="2" Height="auto" x:Name="Dtg" BorderThickness="0" BorderBrush="#242424">
-            <DataGrid.Resources>
-                <Style TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Typography.Capitals" Value="AllSmallCaps"/>
-                    <Setter Property="Foreground" Value="white"/>
-                    <Setter Property="FontSize" Value="20"/>
-                    <Setter Property="Margin" Value="10,15,15,0"/>
-                    <Setter Property="Padding" Value="5,0,0,5"/>
-                    <Setter Property="BorderBrush" Value="#242424"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="FontFamily" Value="/Assets/MF RooneySans Regular.ttf"/>
-                    <Setter Property="Background" Value="#242424"/>
-                </Style>
-                <Style  TargetType="{x:Type DataGridRow}">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Typography.Capitals" Value="AllSmallCaps"></Setter>
-                    <Setter Property="Foreground" Value="#F5E307"/>
-                    <Setter Property="Margin" Value="10,10,10,0"/>
-                    <Setter Property="FontSize" Value="18"/>
-                    <Setter Property="FontFamily" Value="/Assets/MF RooneySans Regular.ttf"/>
-                </Style>
-            </DataGrid.Resources>
-            <DataGrid.Columns >
-                <DataGridTextColumn Binding="{Binding Tiempo}" Width=".40*" Header="Hora y fecha de salida:"/>
-                <DataGridTextColumn Binding="{Binding Destino}" Width=".20*" Header="Destino:"/>
-                <DataGridTextColumn Binding="{Binding Vuelo}" Width=".15*" Header="Vuelo:"/>
-                <DataGridTextColumn Binding="{Binding Puerta}" Width=".15*" Header="Puerto:"/>
-                <DataGridTextColumn Binding="{Binding Status}" Width=".20*" Header="Status:"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <!--Contenido-->
+        <Border  Grid.Row="2" Margin="15,10,15,15" CornerRadius="20" Background="#C2C2C2">
+            <DataGrid Background="#C2C2C2" Margin="10"
+            IsReadOnly="True" VerticalScrollBarVisibility="Auto"  ItemsSource="{Binding ListaAterrizajesFiltrada}" GridLinesVisibility="None" 
+                  HorizontalScrollBarVisibility="Disabled" HeadersVisibility="Column" AutoGenerateColumns="False"  
+                  Height="auto" x:Name="Dtg" BorderThickness="0" BorderBrush="#242424">
+                <!--Estilos DataGrid-->
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Typography.Capitals" Value="AllSmallCaps"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Margin" Value="10,15,15,0"/>
+                        <Setter Property="Padding" Value="5,0,0,5"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Background" Value="#C2C2C2"/>
+                        <Setter Property="FontFamily" Value="/Assets/MF RooneySans Regular.ttf"/>
+                    </Style>
+                    <Style  TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Typography.Capitals" Value="AllSmallCaps"></Setter>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Margin" Value="10,10,10,0"/>
+                        <Setter Property="FontSize" Value="18"/>
+                        <Setter Property="FontFamily" Value="/Assets/MF RooneySans Regular.ttf"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns >
+                    <DataGridTextColumn Binding="{Binding Tiempo}" Width=".40*" Header="Hora y fecha de salida:"/>
+                    <DataGridTextColumn Binding="{Binding Destino}" Width=".20*" Header="Destino:"/>
+                    <DataGridTextColumn Binding="{Binding Vuelo}" Width=".15*" Header="Vuelo:"/>
+                    <DataGridTextColumn Binding="{Binding Puerta}" Width=".15*" Header="Puerta:"/>
+                    <DataGridTextColumn Binding="{Binding Status}" Width=".20*" Header="Status:"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
     </Grid>
 </Window>
