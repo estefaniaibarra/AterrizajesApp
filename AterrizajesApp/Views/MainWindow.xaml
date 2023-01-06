@@ -59,7 +59,7 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns >
-                <DataGridTextColumn Binding="{Binding Tiempo}" Width=".30*" Header="Hora y fecha de salida:"/>
+                <DataGridTextColumn Binding="{Binding Tiempo}" Width=".40*" Header="Hora y fecha de salida:"/>
                 <DataGridTextColumn Binding="{Binding Destino}" Width=".20*" Header="Destino:"/>
                 <DataGridTextColumn Binding="{Binding Vuelo}" Width=".15*" Header="Vuelo:"/>
                 <DataGridTextColumn Binding="{Binding Puerta}" Width=".15*" Header="Puerto:"/>
