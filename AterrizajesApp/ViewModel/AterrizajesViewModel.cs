@@ -70,12 +70,17 @@ namespace AterrizajesApp.ViewModel
 
                 }
 
-                if (item.Status == "En vuelo" && fechaactual.TimeOfDay.Subtract(item.Tiempo.TimeOfDay).TotalSeconds>30)
+                if ((item.Status == "En vuelo") && fechaactual.TimeOfDay.Subtract(item.Tiempo.TimeOfDay).TotalSeconds>30)
                 {
 
                     await serviceAterrizaje.Delete(item);
                 }
 
+                if ((item.Status == "Concluido"))
+                {
+
+                    await serviceAterrizaje.Delete(item);
+                }
 
                 if (item.Tiempo.Date == fechaactual.Date && (item.Status.ToLower() == "programado"|| item.Status.ToLower() == "abordando"))
             {
@@ -94,7 +99,7 @@ namespace AterrizajesApp.ViewModel
 
 
             }
-            else if (item.Tiempo.Date < fechaactual.Date && (item.Status.ToLower() == "programado" || item.Status.ToLower() == "en vuelo"))
+            else if (item.Tiempo.Date < fechaactual.Date && (item.Status.ToLower() == "programado" || item.Status.ToLower() == "en vuelo" || item.Status.ToLower() == "abordando"))
             {
                 item.Status = "Concluido";
                 await serviceAterrizaje.Update(item);
