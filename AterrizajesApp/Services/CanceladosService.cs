@@ -28,7 +28,7 @@ namespace AterrizajesApp.Services
         public void eliminarcancelado(object? p)
         {
 
-            Temporizador.Interval = TimeSpan.FromSeconds(5);
+            Temporizador.Interval = TimeSpan.FromSeconds(30);
             Temporizador.Tick += (object s, EventArgs a) => timer_Tick(s, a, p);
             Temporizador.Start();
         }

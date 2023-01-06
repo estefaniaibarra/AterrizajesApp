@@ -35,7 +35,7 @@ namespace AterrizajesApp.ViewModel
             CargarAterrizajes();
      
                     Temporizador = new DispatcherTimer();
-            Temporizador.Interval = TimeSpan.FromSeconds(10);
+            Temporizador.Interval = TimeSpan.FromSeconds(5);
             Temporizador.Tick += timer_Tick;
             Temporizador.Start();
             Cancelados = new List<Partidas>();
