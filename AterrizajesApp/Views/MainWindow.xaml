@@ -30,7 +30,7 @@
                        FontSize="55" VerticalAlignment="Center" 
                        HorizontalAlignment="Left"/>
             <StackPanel Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="2">
-                <Label Foreground="White">Filtrar por fecha</Label>
+                <Label Foreground="White">Filtrar por fecha:</Label>
                 <DatePicker SelectedDateChanged="DatePicker_SelectedDateChanged" SelectedDate="{Binding FechaFiltro}"></DatePicker>
 
             </StackPanel>
@@ -59,11 +59,11 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns >
-                <DataGridTextColumn Binding="{Binding Tiempo}" Width=".30*" Header="Tiempo"/>
-                <DataGridTextColumn Binding="{Binding Destino}" Width=".20*" Header="Destino"/>
-                <DataGridTextColumn Binding="{Binding Vuelo}" Width=".15*" Header="Vuelo"/>
-                <DataGridTextColumn Binding="{Binding Puerta}" Width=".15*" Header="Puerto"/>
-                <DataGridTextColumn Binding="{Binding Status}" Width=".20*" Header="Status"/>
+                <DataGridTextColumn Binding="{Binding Tiempo}" Width=".30*" Header="Hora y fecha de salida:"/>
+                <DataGridTextColumn Binding="{Binding Destino}" Width=".20*" Header="Destino:"/>
+                <DataGridTextColumn Binding="{Binding Vuelo}" Width=".15*" Header="Vuelo:"/>
+                <DataGridTextColumn Binding="{Binding Puerta}" Width=".15*" Header="Puerto:"/>
+                <DataGridTextColumn Binding="{Binding Status}" Width=".20*" Header="Status:"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
